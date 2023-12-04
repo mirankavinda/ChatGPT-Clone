@@ -1,8 +1,27 @@
 import logo from './logo.svg';
 import './normalize.css';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  // add state for input and chat log
+  const [input, setInput] = useState("");
+  const [chatLog, setChatLog] = useState([{
+    user: "gpt",
+    message: "Hello, I'm ChatGPT"
+  },{
+    user: "me",
+    message: "Can you help me with my assignment?"
+  }]);
+
+  function handleSubmit(e) { 
+    e.preventDefault();
+    setChatLog([...chatLog, { user: "me", message: `${input}`}]);
+    setInput("");
+
+  }
+
   return (
     <div className="App">
       <aside className="sidemenu">
@@ -13,19 +32,33 @@ function App() {
       </aside>
       <section className="chatbox">
         <div className="chat-log">
-          <div className="chat-message">
+          {chatLog.map((message, index) => (
+            <ChatMessage key={index} message={message} />
+          ))}
+        </div>
+
+        <div className="chat-input-holder">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              rows="1"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="chat-input-textare" ></input>
+          </form>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+const ChatMessage = ({ message }) => {
+  return (
+    <div className={`chat-message ${message.user == "gpt" && "chatgpt"}`}>
             <div className="chat-message-center">
-              <div className="avatar">
-              </div>
-              <div className="message">
-                Hello
-              </div>
-            </div>
-          </div>
-          <div className="chat-message chatgpt">
-            <div className="chat-message-center">
-              <div className="avatar chatgpt">
-              <svg
+        <div className={`avatar ${message.user == "gpt" && "chatgpt"}`}>
+
+          {message.user == "gpt" && <svg
     xmlns="http://www.w3.org/2000/svg"
     width={20}
     height={20}
@@ -47,22 +80,14 @@ function App() {
       textAnchor="none"
       transform="scale(10.66667)"
     />
-  </svg>
+  </svg> }
               </div>
               <div className="message">
-                Hello, I'm ChatGPT
+                {message.message}
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="chat-input-holder">
-          <textarea rows="1"
-            className="chat-input-textare" placeholder="Message ChatGPT..."></textarea>
-        </div>
-      </section>
-    </div>
-  );
+  )
 }
 
 export default App;

@@ -64,8 +64,7 @@
   color: #ffffff;
   font-size: 1em;
   outline: none;
-  /* border: 1 solid #d9d9e3; 
-  box-sizing: border-box; */
+  border: 1px solid #8e8ea0;
   border-radius: 16px;
 }
 
@@ -121,8 +120,6 @@
   align-items: center;
   justify-content: center;
 }
-
-
 
 .message{
   padding-left: 40px;
