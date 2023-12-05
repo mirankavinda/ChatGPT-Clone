@@ -88,9 +88,11 @@
   text-align: left;
 }
 
+/*
 .chat-message.chatgpt {
   background-color: #202123;
 }
+*/
 
 .chat-message-center {
   display: flex;
