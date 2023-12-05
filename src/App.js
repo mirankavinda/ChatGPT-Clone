@@ -22,7 +22,7 @@ function App() {
 
     /* fetch response to the api combining the chat log array of messages
     and sending it as a message to localhost:3000 as a post */
-    const response = await fetch("http://localhost:3000/", {
+    const response = await fetch("http://localhost:3080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
